@@ -18,7 +18,7 @@ class Ball:
         sx = self.x - server.background.window_left
         sy = self.y - server.background.window_bottom
         self.image.draw(sx, sy)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def update(self):
         pass
@@ -29,4 +29,8 @@ class Ball:
         return sx - 10, sy - 10, sx + 10, sy + 10
 
     def handle_collision(self, group, other):
-        pass
+        if group == 'boy:ball':
+            print("Ball collided with Boy!")
+            # 충돌 시 Ball 삭제
+            game_world.remove_object(self)
+

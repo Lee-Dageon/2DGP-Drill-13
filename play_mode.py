@@ -30,10 +30,15 @@ def init():
     game_world.add_object(server.background, 0)
     server.boy = Boy()
     game_world.add_object(server.boy, 1)
+
     # Ball 100개 추가
-    for _ in range(100):
-        ball = Ball()  # Ball의 생성자가 랜덤 위치를 처리함
-        game_world.add_object(ball, 1)  # Layer 1에 추가
+    balls = [Ball() for _ in range(100)]
+    game_world.add_objects(balls, 1)
+
+    # Boy와 Ball 간 충돌 페어 추가
+    for ball in balls:
+        game_world.add_collision_pair('boy:ball', server.boy, ball)
+
 
 
 

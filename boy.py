@@ -239,8 +239,8 @@ class Boy:
         self.image.clip_draw(int(self.frame) * 100, self.action * 100, 100, 100, sx, sy)
         self.font.draw(int(sx - 100), int(sy + 60), f'({self.x:5.1f}, {self.y:5.1f})', (255, 255, 0))
 
-        # Bounding box 그리기
-        draw_rectangle(*self.get_bb())
+        # # Bounding box 그리기
+        # draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         #월드좌표계를 화면좌표로 변환
@@ -250,7 +250,9 @@ class Boy:
         return sx - 20, sy - 50, sx + 20, sy + 50
 
     def handle_collision(self, group, other):
-        pass
+        if group == 'boy:ball' and isinstance(other, Ball):
+            print("Boy collided with a Ball!")
+
 
 
 
