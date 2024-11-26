@@ -228,6 +228,7 @@ class Boy:
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))
 
+
     def draw(self):
         sx, sy = get_canvas_width() / 2, get_canvas_height() / 2
 
@@ -238,9 +239,15 @@ class Boy:
         self.image.clip_draw(int(self.frame) * 100, self.action * 100, 100, 100, sx, sy)
         self.font.draw(int(sx - 100), int(sy + 60), f'({self.x:5.1f}, {self.y:5.1f})', (255, 255, 0))
 
+        # Bounding box 그리기
+        draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.x - 20, self.y - 50, self.x + 20, self.y + 50
+        #월드좌표계를 화면좌표로 변환
+        sx = self.x - server.background.window_left
+        sy = self.y - server.background.window_bottom
+
+        return sx - 20, sy - 50, sx + 20, sy + 50
 
     def handle_collision(self, group, other):
         pass

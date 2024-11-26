@@ -8,6 +8,7 @@ import game_world
 
 import server
 from boy import Boy
+from ball import Ball
 
 # fill here
 from background import FixedBackground as Background
@@ -24,12 +25,17 @@ def handle_events():
             server.boy.handle_event(event)
 
 
-
 def init():
     server.background = Background()
     game_world.add_object(server.background, 0)
     server.boy = Boy()
     game_world.add_object(server.boy, 1)
+    # Ball 100개 추가
+    for _ in range(100):
+        ball = Ball()  # Ball의 생성자가 랜덤 위치를 처리함
+        game_world.add_object(ball, 1)  # Layer 1에 추가
+
+
 
 def finish():
     game_world.clear()
